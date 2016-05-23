@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Language" Content="ru">
     <title>Trees</title>
 </head>
 <body>
@@ -17,16 +18,16 @@ try
 catch(PDOException $e) {
     echo $e->getMessage();
 }
-$type = $_POST['type'];
-$family = $_POST['family'];
+$type = $_POST['type_id'];
+$family = $_POST['family_id'];
 $name = $_POST['name'];
 $age = $_POST['age'];
-$kind = $_POST['kind'];
+$kind = $_POST['kind_id'];
 $height = $_POST['height'];
 if ($type != ''){
 
     try {
-        $query = $db->prepare("INSERT INTO trees1(type, family, name, age, kind, height) VALUES ('$type', '$family', '$name', '$age', '$kind','$height')");
+        $query = $db->prepare("INSERT INTO trees(type_id, family_id, name, age, kind_id, height) VALUES ('$type', '$family', '$name', '$age', '$kind','$height')");
         $query->execute();
     } catch (PDOException $e) {
         echo $e->getMessage();
@@ -37,16 +38,44 @@ if ($type != ''){
     }
 
 }
+$query = $db->prepare("SELECT id, name FROM tree_family");
+$query->execute();
+$families = $query->fetchAll();
+$query = $db->prepare("SELECT id, name FROM tree_kind");
+$query->execute();
+$kinds = $query->fetchAll();
+$query = $db->prepare("SELECT id, name FROM tree_type");
+$query->execute();
+$types = $query->fetchAll();
 ?>
 
 <form method="post" action="#">
     <p><b>Создание дерева</b></p>
     <p>
-        Тип <input type="text" name="type"><br>
-        Род <input type="text" name="family"><br>
+        Тип <select name="type">
+            <?php
+            foreach ($types as $type ){
+                echo '<option value="'.$type['id'].'">'.$type['name'].'</option>';
+            }
+            ?>
+            </select><br>
+        Род <select name="family">
+            <?php
+            foreach ($families as $family ){
+                echo '<option value="'.$family['id'].'">'.$family['name'].'</option>';
+            }
+            ?>
+        </select><br>
         Название <input type="text" name="name"><br>
+
         Возраст <input type="text" name="age"><br>
-        Вид <input type="text" name="kind"><br>
+        Вид <select name="kind">
+            <?php
+            foreach ($kinds as $kind ){
+                echo '<option value="'.$kind['id'].'">'.$kind['name'].'</option>';
+            }
+            ?>
+        </select><br>
         Высота <input type="text" name="height"><br>
     </p>
     <p><input type="submit"></p>

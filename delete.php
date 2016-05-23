@@ -13,7 +13,7 @@ try {
     echo $e->getMessage();
 }
 $treeId = intval($_GET['id']);
-$query = $db->prepare("DELETE FROM trees1 WHERE id = ".$treeId);
+$query = $db->prepare("DELETE FROM trees WHERE id = ".$treeId);
 $query->execute();
 $tree = $query->fetch();
 echo '<b>Запись '.$treeId.' удалена</b>';

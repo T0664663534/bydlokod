@@ -30,7 +30,17 @@
         echo $e->getMessage();
     }
     $treeId = intval($_GET['id']);
-    $query = $db->prepare("SELECT * FROM trees1 WHERE id = ".$treeId);
+    $query = $db->prepare("SELECT
+	trees.id,
+	trees.name,
+	tree_family.name AS family,
+	tree_kind.name AS kind,
+    tree_type.name AS type
+FROM trees
+JOIN tree_family ON tree_family.id = trees.family_id
+JOIN tree_kind ON tree_kind.id = trees.kind_id
+JOIN tree_type ON tree_type.id = trees.type_id
+WHERE trees.id = ".$treeId);
     $query->execute();
     $tree = $query->fetch();
     echo '<tr><td>'.$tree['type'].'</td>
