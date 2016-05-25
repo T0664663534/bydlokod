@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="Content-Language" Content="ru">
-    <title>Family</title>
+    <title>Kind</title>
 </head>
 <body>
 <hr>
@@ -22,7 +22,7 @@ $name = $_POST['name'];
 if ($name != ''){
 
     try {
-        $query = $db->prepare("INSERT INTO tree_family (name) VALUES ('$name')");
+        $query = $db->prepare("INSERT INTO tree_kind (name) VALUES ('$name')");
         $query->execute();
     } catch (PDOException $e) {
         echo $e->getMessage();
@@ -36,13 +36,13 @@ if ($name != ''){
 ?>
 
 <form method="post" action="#">
-    <p><b>Создание Семейства дерева</b></p>
+    <p><b>Создание Рода дерева</b></p>
     <p>
         Название <input type="text" name="name"><br>
     </p>
     <p><input type="submit"></p>
 </form>
-<a href="/family/index.php">Назад</a>
+<a href="/kind/index.php">Назад</a>
 <hr>
 </hr>
 </body>

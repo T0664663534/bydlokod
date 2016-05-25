@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Family</title>
+    <title>Kind</title>
 </head>
 <body>
 <hr>
@@ -17,20 +17,20 @@ try
 catch(PDOException $e) {
     echo $e->getMessage();
 }
-$familyId = $_GET['id'];
+$kindId = $_GET['id'];
 $name = $_POST['name'];
-$query = $db->prepare("SELECT * FROM tree_family WHERE id = ".$familyId);
+$query = $db->prepare("SELECT * FROM tree_kind WHERE id = ".$kindId);
 $query->execute();
-$family = $query->fetch();
+$kind = $query->fetch();
 if ($name != ''){
 
     try {
-        $query = $db->prepare("UPDATE tree_family SET name = '$name' WHERE id = ".$familyId);
+        $query = $db->prepare("UPDATE tree_kind SET name = '$name' WHERE id = ".$kindId);
         $query->execute();
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
-    echo "UPDATE 'tree_family' SET 'name'=  '$name' WHERE id = ".$familyId;
+    echo "UPDATE 'tree_kind' SET 'name'=  '$name' WHERE id = ".$kindId;
     {
         echo '<b>Запись изменена</b>';
 //print_r($result);

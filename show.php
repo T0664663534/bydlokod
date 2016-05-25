@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Family</title>
+    <title>Kind</title>
 </head>
 <body>
 <hr>
@@ -26,23 +26,23 @@
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
-    $familyId = intval($_GET['id']);
+    $kindId = intval($_GET['id']);
     $query = $db->prepare("SELECT
 		id,
 		name
-        FROM tree_family");
+        FROM tree_kind");
     $query->execute();
-    $family = $query->fetch();
+    $kind = $query->fetch();
     echo '<tr>
-            <td>'.$family['name'].'</td>
+            <td>'.$kind['name'].'</td>
             </tr>';
     //print_r($result);
     ?>
 
 </table>
-<a href="/family/add.php">Добавить</a>
-<a href="/family/index.php">Назад</a>
-<a href="/family/Update.php?id=<?php echo $treeId; ?>">Update</a>
+<a href="/kind/add.php">Добавить</a>
+<a href="/kind/index.php">Назад</a>
+<a href="/kind/Update.php?id=<?php echo $treeId; ?>">Update</a>
 <hr>
 </hr>
 </body>
